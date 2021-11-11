@@ -1,0 +1,15 @@
+DECLARE 
+    NUM1 NUMBER;
+    NUM2 NUMBER;
+    SOMA NUMBER;
+BEGIN
+    num1 := 23;
+    num2 := 50;
+    SOMA := num1 + num2;
+    
+    DBMS_OUTPUT.PUT_LINE('SOMA É ' || SOMA);
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-2001, 'ERRO AO CALCULAR');
+END;
