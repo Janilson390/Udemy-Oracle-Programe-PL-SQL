@@ -1,0 +1,199 @@
+
+/*BOCOS ANONIMOS - SIMPLES*/
+DECLARE
+    --DECLARAÇÃO DE VARIAVEIS 
+BEGIN
+    --TODA A LÓGICA
+END; 
+
+
+/*BOCOS ANONIMOS - COM TRATAMENTO D EXCEÇÕES*/
+DECLARE
+    --DECLARAÇÃO DE VARIAVEIS 
+BEGIN
+    --TODA A LÓGICA
+EXCEPTION 
+    --SESSÃO DE TRATAMENTO D ERROS    
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO DO PROGRAMA');        
+END; 
+
+
+/*BOCOS ANONIMOS ANINHADOS*/
+DECLARE
+    --DECLARAÇÃO DE VARIAVEIS 
+BEGIN
+    --TODA A LÓGICA
+    DECLARE 
+        
+    BEGIN
+        
+    EXCEPTION 
+    --SESSÃO DE TRATAMENTO D ERROS    
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO DO PROGRAMA'); 
+        
+    END;
+    
+EXCEPTION 
+    --SESSÃO DE TRATAMENTO D ERROS    
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO DO PROGRAMA');        
+END; 
+
+
+DECLARE
+    v_NUMERO NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('INICIO BLOCO MAIS EXTERNO!');
+    
+    v_NUMERO := 10;
+
+    DBMS_OUTPUT.PUT_LINE('VALOR DE v_NUMERO É ' || v_NUMERO);
+    
+    DECLARE 
+        v_NUMERO2 NUMBER := 0;    
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('INICIO BLOCO MAIS INTERNO!');
+        DBMS_OUTPUT.PUT_LINE(v_NUMERO || ' DIVIDIDO POR ' || v_NUMERO2 || ' É '  || v_NUMERO / v_NUMERO2);
+        DBMS_OUTPUT.PUT_LINE('FINAL BLOCO MAIS INTERNO!');
+    EXCEPTION 
+    --SESSÃO DE TRATAMENTO D ERROS    
+    WHEN ZERO_DIVIDE THEN
+        RAISE_APPLICATION_ERROR(-20001, 'IMPOSSÌVEL DIVIDIR POR ZERO!'); 
+        
+    END;
+    
+    DBMS_OUTPUT.PUT_LINE('FINAL BLOCO MAIS EXTERNO!');
+    
+EXCEPTION 
+    --SESSÃO DE TRATAMENTO D ERROS    
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO DO PROGRAMA');        
+END; 
+
+
+/*ESTRUTURAS CONDICIONAIS*/ 
+
+/*ESTRUTURA BÁSICA*/
+BEGIN
+    IF 1=1 THEN --CONDIÇÃO
+        --FAZ ALGUMA COISA
+        DBMS_OUTPUT.PUT_LINE('TESTE'); 
+    ELSE -- CONDIÇÃO FALSA
+        --FAZ OUTRA COISA
+        DBMS_OUTPUT.PUT_LINE('TESTE2'); 
+    END IF; --FINAL
+    
+    --OBS: SEMPRE FECHE SEUS IFs.
+END;
+
+
+DECLARE 
+    vNUMERO1 NUMBER;
+BEGIN
+    vNUMERO1 := 10;    
+    
+    IF MOD(vNUMERO1, 2) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('É PAR!');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('É IMPAR!');    
+    END IF;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO NA EXECUÇÃO');     
+END;
+
+DECLARE 
+    vUF VARCHAR(2);
+BEGIN
+    vUF := :UF;    
+    
+    IF UPPER(vUF) = 'RN' THEN
+        DBMS_OUTPUT.PUT_LINE('O ESTADO É RIO GRANDE DO NORTE!');
+    ELSIF UPPER(vUF) = 'RS' THEN
+        DBMS_OUTPUT.PUT_LINE('O ESTADO É RIO GRANDE DO SUL!');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('ESTADO DESCONHECIDO!');
+    END IF;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ERRO NA EXECUÇÃO');     
+END;
+
+
+/*ESTRUTURAS DE REPETIÇÃO*/
+BEGIN
+    FOR i IN 1..10 LOOP
+        DBMS_OUTPUT.PUT_LINE(i || ' x 2  = ' || i * 2);
+    END LOOP;    
+END;
+
+BEGIN
+    FOR i IN REVERSE 1..10 LOOP
+        DBMS_OUTPUT.PUT_LINE(i || ' x 2  = ' || i * 2);
+    END LOOP;    
+END;
+
+
+BEGIN
+    FOR i IN 1..10 LOOP
+        DBMS_OUTPUT.PUT_LINE('TABUADA DE ' || i);
+        DBMS_OUTPUT.NEW_LINE;
+        
+        FOR j IN 1..10 LOOP
+            DBMS_OUTPUT.PUT_LINE(j || ' x ' || i || ' = ' || j * i);
+        END LOOP;
+    
+        DBMS_OUTPUT.PUT_LINE('---------------------------------');
+        DBMS_OUTPUT.NEW_LINE;
+    END LOOP;    
+END;
+
+DECLARE
+    v_COUNT NUMBER := 2;
+BEGIN
+    WHILE v_COUNT <= 10 LOOP
+        DBMS_OUTPUT.PUT_LINE(v_COUNT || ' x 2  = ' || v_COUNT * 2);
+        v_COUNT := v_COUNT + 2; 
+    END LOOP;    
+END;
+
+
+DECLARE
+    v_COUNT NUMBER := 1;
+BEGIN
+    WHILE v_COUNT <= 10 LOOP
+        DBMS_OUTPUT.PUT_LINE(v_COUNT || ' x 2  = ' || v_COUNT * 2);
+        
+        IF (v_COUNT = 8) THEN
+            DBMS_OUTPUT.PUT_LINE('FIM DO LAÇO!');
+            EXIT;
+        ELSE
+            v_COUNT := v_COUNT + 1;
+        END IF;
+    END LOOP;    
+END;
+
+
+
+
+BEGIN
+   FOR i IN 1..10 LOOP
+        DBMS_OUTPUT.PUT_LINE(i || ' x 2  = ' || i * 2);
+        
+        IF (i = 8) THEN
+            DBMS_OUTPUT.PUT_LINE('FIM DO LAÇO!');
+            EXIT;      
+        END IF;
+        
+    END LOOP;    
+END;
+
+
+--TAREFA DE CASA: TABUDA NO WHILE
+--BONUS: QUERO Á UM NUMERO X;
+
+    
