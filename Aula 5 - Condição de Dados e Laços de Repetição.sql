@@ -74,12 +74,27 @@ END;
 
 
 /*ESTRUTURAS CONDICIONAIS*/ 
+
+/*ESTRUTURA BÁSICA*/
+BEGIN
+    IF 1=1 THEN --CONDIÇÃO
+        --FAZ ALGUMA COISA
+        DBMS_OUTPUT.PUT_LINE('TESTE'); 
+    ELSE -- CONDIÇÃO FALSA
+        --FAZ OUTRA COISA
+        DBMS_OUTPUT.PUT_LINE('TESTE2'); 
+    END IF; --FINAL
+    
+    --OBS: SEMPRE FECHE SEUS IFs.
+END;
+
+
 DECLARE 
     vNUMERO1 NUMBER;
 BEGIN
-    vNUMERO1 := 11;    
+    vNUMERO1 := 10;    
     
-    IF MOD(vnumero1, 2) = 0 THEN
+    IF MOD(vNUMERO1, 2) = 0 THEN
         DBMS_OUTPUT.PUT_LINE('É PAR!');
     ELSE
         DBMS_OUTPUT.PUT_LINE('É IMPAR!');    
@@ -95,9 +110,9 @@ DECLARE
 BEGIN
     vUF := :UF;    
     
-    IF vUF = 'RN' THEN
+    IF UPPER(vUF) = 'RN' THEN
         DBMS_OUTPUT.PUT_LINE('O ESTADO É RIO GRANDE DO NORTE!');
-    ELSIF vUF = 'RS' THEN
+    ELSIF UPPER(vUF) = 'RS' THEN
         DBMS_OUTPUT.PUT_LINE('O ESTADO É RIO GRANDE DO SUL!');
     ELSE
         DBMS_OUTPUT.PUT_LINE('ESTADO DESCONHECIDO!');
@@ -138,11 +153,11 @@ BEGIN
 END;
 
 DECLARE
-    v_COUNT NUMBER := 1;
+    v_COUNT NUMBER := 2;
 BEGIN
     WHILE v_COUNT <= 10 LOOP
         DBMS_OUTPUT.PUT_LINE(v_COUNT || ' x 2  = ' || v_COUNT * 2);
-        v_COUNT := v_COUNT + 1;
+        v_COUNT := v_COUNT + 2; 
     END LOOP;    
 END;
 
@@ -154,6 +169,7 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE(v_COUNT || ' x 2  = ' || v_COUNT * 2);
         
         IF (v_COUNT = 8) THEN
+            DBMS_OUTPUT.PUT_LINE('FIM DO LAÇO!');
             EXIT;
         ELSE
             v_COUNT := v_COUNT + 1;
@@ -169,11 +185,15 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE(i || ' x 2  = ' || i * 2);
         
         IF (i = 8) THEN
+            DBMS_OUTPUT.PUT_LINE('FIM DO LAÇO!');
             EXIT;      
         END IF;
         
     END LOOP;    
 END;
 
+
+--TAREFA DE CASA: TABUDA NO WHILE
+--BONUS: QUERO Á UM NUMERO X;
 
     
